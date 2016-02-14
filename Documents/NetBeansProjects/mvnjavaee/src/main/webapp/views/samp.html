@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Sample</title>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>    </head>
+    <body>
+        <h1>Account List</h1>
+        <input type="button" value="Account List Get" id="getAccounts" name="getAccounts"/>
+
+        <form action="rest/users/detail" method="post" name="postForm">
+            <input type="hidden" value="" id="postUserId" name="postUserId"/>
+            <div class="accountList">
+                以下にユーザリストが表示される
+                <ul>
+                    <li>(例)ユーザ1</li>
+                </ul>
+            </div>
+        </form>
+        <script>
+        $('#getAccounts').on('click', 
+            function(){
+                alert('Account List Get！');
+                sxhr = $.ajax("rest/accounts", {cache: false});
+
+                // 成功時
+                sxhr.done(function(data){
+                        alert(data);
+                        // jQuery1.4以降の.ajaxや.getを使うと、JSONのデータはすでにパースされているらしい
+                        //var jsonData = JSON.parse(data.toString());
+
+                        for(var i=0; i<data.length; i++){
+                                $('.accountList ul').append('<li id="data'+i+'">'+data[i]+'<input type="button" value="照会" name="data'+i+'" class="showData"/></li>');
+                        }
+                });
+                sxhr.fail(function(){ alert("エラーが発生しました"); });
+                /*sxhr.always(function(data){ 
+                        alert("");
+
+                });*/
+            }
+        );
+        $(document).on('click','.showData',
+            function(){
+                //alert($(this).parent('li').text());
+                $('#postUserId').val($(this).parent('li').text());
+                document.postForm.submit();
+            }
+        );
+        </script>
+    </body>
+</html>
