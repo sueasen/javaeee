@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <!-- jQueryライブラリの読み込み -->
+        <script src='js/libs/jquery-2.2.0.js'></script>
+        
+        <!-- RESTクライアントの記述 -->
+        <script>
+             $(function(){
+                 btnAct('#btnGetArgs', "GET", "http://localhost:8080/mvn_sample/api/sampleRestApi/getTextArgs", {"id":"0001","name":"get_args"});
+             });
+             
+             $(function(){
+                 btnAct('#btnPostArgs', "POST", "http://localhost:8080/mvn_sample/api/sampleRestApi/postTextArgs", {"id":"0002","name":"post_args"});
+             });
+             
+             $(function(){
+                 btnAct('#btnPutArgs', "PUT", "http://localhost:8080/mvn_sample/api/sampleRestApi/putTextArgs/0003/put_args");
+             });
+             
+             $(function(){
+                 btnAct('#btnGet', "GET", "http://localhost:8080/mvn_sample/api/sampleRestApi/getText");
+             });
+
+             $(function(){
+                 btnAct('#btnPost', "POST", "http://localhost:8080/mvn_sample/api/sampleRestApi/postText");
+             });
+
+             $(function(){
+                 btnAct('#btnPut', "PUT", "http://localhost:8080/mvn_sample/api/sampleRestApi/putText");
+             });
+
+             $(function(){
+                 btnAct('#btnDelete', "DELETE", "http://localhost:8080/mvn_sample/api/sampleRestApi/deleteText");
+             });
+
+             $(function(){
+                 btnAct('#btnJson', "GET", "http://localhost:8080/mvn_sample/api/sampleRestApi/getJson");
+             });
+
+            var btnAct = function(btn, type, url, data) {
+                $(btn).on('click', function(){    
+                    $.ajax({
+                        type: type,
+                        url: url,
+                        data: data,
+                        success: function(data){ 
+                            $("#msg").text(data);
+                        }
+                    });
+                });
+            };
+        </script>
+        
+    </head>
+    <body>
+        <div id="msg">最初</div>
+        <input type="button" value="GETArgsメソッド" id="btnGetArgs" />
+        <input type="button" value="POSTArgsメソッド" id="btnPostArgs" />
+        <input type="button" value="PUTArgsメソッド" id="btnPutArgs" />
+        <input type="button" value="GETメソッド" id="btnGet" />
+        <input type="button" value="POSTメソッド" id="btnPost" />
+        <input type="button" value="PUTメソッド" id="btnPut" />
+        <input type="button" value="DELETEメソッド" id="btnDelete" />
+        <input type="button" value="JSONメソッド" id="btnJson" />
+    </body>
+</html>
