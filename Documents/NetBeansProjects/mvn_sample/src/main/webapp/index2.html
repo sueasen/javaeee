@@ -11,7 +11,7 @@
         <!-- Bootstrap -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <!-- Custom styles for this template -->
-        <link href="css/sticky-footer-navbar.css" rel="stylesheet">
+        <link href="css/dashboard.css" rel="stylesheet">
         <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
         <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
         <!-- hadson -->
@@ -27,16 +27,22 @@
     <body>
         <div id="header"></div>
 
-        <div class="container">
-            <div class="page-header">
-                <h1>Sticky footer with fixed navbar</h1>
-            </div>
-            <p class="lead">Pin a fixed-height footer to the bottom of the viewport in desktop browsers with this custom HTML and CSS. A fixed navbar has been added with <code>padding-top: 60px;</code> on the <code>body > .container</code>.</p>
-            <p>Back to <a href="../sticky-footer">the default sticky footer</a> minus the navbar.</p>
+        <div class="container-fluid">
+            <div class="row">
+                <div id="sidebar"></div>
 
-            <h1>hadsontable</h1>
-            <div id="example" class="handsontable"></div>            
-            
+                <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                    <div class="sub-header">
+                        <h1>Sticky footer with fixed navbar</h1>
+                    </div>
+                    <p class="lead">Pin a fixed-height footer to the bottom of the viewport in desktop browsers with this custom HTML and CSS. A fixed navbar has been added with <code>padding-top: 60px;</code> on the <code>body > .container</code>.</p>
+                    <p>Back to <a href="../sticky-footer">the default sticky footer</a> minus the navbar.</p>
+
+                    <h1>hadsontable</h1>
+                    <div id="example" class="handsontable"></div>            
+                </div>
+
+            </div>
         </div>
         
         <div id="footer"></div>        
