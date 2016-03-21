@@ -8,6 +8,8 @@
         <!-- jQueryライブラリの読み込み -->
         <script src='js/libs/jquery-2.2.0.js'></script>
         
+        <script src='js/basetmp.js'></script>
+
         <!-- RESTクライアントの記述 -->
         <script>
              $(function(){
@@ -39,7 +41,7 @@
              });
 
              $(function(){
-                 btnAct('#btnJson', "GET", "http://localhost:8080/mvn_sample/api/sampleRestApi/getJson");
+                 btnAct2('#btnJson', "GET", "http://localhost:8080/mvn_sample/api/sampleRestApi/getJson");
              });
 
             var btnAct = function(btn, type, url, data) {
@@ -54,11 +56,36 @@
                     });
                 });
             };
+            
+            var btnAct2 = function(btn, type, url, data) {
+                $(btn).on('click', function(){    
+                    $.ajax({
+                        type: type,
+                        url: url,
+                        data: data,
+                        success: function(data){ 
+                            for (var i in data) {
+                               $("#list").append("<li>" + data[i].shopName + "</li>");
+                            }
+                        }
+                    });
+                });
+            };
+            $("#btnJson").click(function() {
+              $.getJSON("mvn_sample/api/sampleRestApi/getJson", function(data) {
+                for (var i in data) {
+                  $("#list").append("<li>" + data[i].shopName + "</li>");
+                }
+              });
+            });
         </script>
         
     </head>
     <body>
-        <div id="msg">最初</div>
+        <div id="header"></div>
+        <div id="footer"></div>        
+
+        <div id="msg">最初2</div>
         <input type="button" value="GETArgsメソッド" id="btnGetArgs" />
         <input type="button" value="POSTArgsメソッド" id="btnPostArgs" />
         <input type="button" value="PUTArgsメソッド" id="btnPutArgs" />
@@ -67,5 +94,10 @@
         <input type="button" value="PUTメソッド" id="btnPut" />
         <input type="button" value="DELETEメソッド" id="btnDelete" />
         <input type="button" value="JSONメソッド" id="btnJson" />
+        <button id="button1">get json!</button>
+        <button id="button2">get json2!</button>
+        <hr>
+        <div id="list"></div>
+        <hr>
     </body>
 </html>

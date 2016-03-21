@@ -5,8 +5,11 @@
  */
 package mfacet.mvn_sample.rest.api;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
@@ -14,6 +17,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import net.arnx.jsonic.JSON;
@@ -69,10 +73,34 @@ public class SampleRestApi {
 
     @GET
     @Path("getJson")
-    public String getSampleJson(){
-        Map<String, Object> ret = new HashMap<>();
-        ret.put("response", "Hello, World");
-        return "Hello REST world Json";
-//        return JSON.encode(ret);
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Shop> getSampleJson(){
+       List<Shop> shopList = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            Shop shop = new Shop();
+            shop.setShopId(String.valueOf(i));
+            shop.setShopName("shopName" + i);
+            shopList.add(shop);
+        }
+        return shopList;
     } 
+
+    /**
+     * Retrieves representation of an instance of example.resource.ShopResource
+     * @return an instance of java.lang.String
+     */
+    @GET
+    @Path("getJson2")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Shop> getJson2() {
+       List<Shop> shopList = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            Shop shop = new Shop();
+            shop.setShopId(String.valueOf(i));
+            shop.setShopName("shopName" + i);
+            shopList.add(shop);
+        }
+        return shopList;
+    }
+
 }
