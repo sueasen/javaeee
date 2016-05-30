@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+    </head>
+  <body>
+    <h1>JAX-RS test</h1>
+    <button id="button1">get json!</button>
+    <button id="button2">get json2!</button>
+    <div id="list"></div>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+    <script>
+      $("#button1").click(function() {
+        $.getJSON("webresources/Shop", function(data) {
+          for (var i in data) {
+            $("#list").append("<li>" + data[i].shopName + "</li>");
+          }
+        });
+      });
+
+      $("#button2").click(function() {
+        $.getJSON("webresources/Shop/999", function(data) {
+          $("#list").append("<li>" + data.shopName + "</li>");
+        });
+      });
+    </script>
+  </body>
+</html>
