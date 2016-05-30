@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- jQueryライブラリの読み込み -->
+<!--        <script src='js/libs/jquery-2.2.0.js'></script>
+-->
+        <script type="text/javascript" src="/knowledgebank/faces/javax.faces.resource/jsf.js?ln=javax.faces"></script>
+        <script type="text/javascript" src="/knowledgebank/faces/javax.faces.resource/application.js?ln=js"></script>
+        <script type="text/javascript" src="/knowledgebank/faces/javax.faces.resource/jquery-2.2.0.js?ln=js"></script>
+        
+        <script>
+             $(function(){
+                 btnAct('#btnGetArgs', "GET", "http://localhost:8080/knowledgebank/webresources/knowledge/search", {"id":"0001","name":"get_args"});
+             });
+             
+            var btnAct = function(btn, type, url, data) {
+                $(btn).on('click', function(){    
+                    $.ajax({
+                        type: type,
+                        url: url,
+                        data: data,
+                        success: function(data){
+                            $("#msg").text(data);
+                            for (var i in data) {
+                              $("#list").append("<li>" + data[i].id + "__" + data[i].title + "</li>");
+                            }
+                        }
+                    });
+                });
+            };
+        </script>
+    </head>
+    <body>
+        <div id="msg">aaa</div>
+        <hr>
+        <div id="list"></div>
+        <hr>
+        <input type="button" value="GET test" id="btnGetArgs" />
+    </body>
+</html>
